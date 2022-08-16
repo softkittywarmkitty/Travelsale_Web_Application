@@ -1,0 +1,35 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Destination List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.travelsale.add_destination %}
+        <a
+                href="{% url 'travelsale_destination_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Destination</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Destination List</h2>
+    {% if perms.travelsale.add_destination %}
+        <div class="mobile">
+            <a href="{% url 'travelsale_destination_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Destination</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for destination in destination_list %}
+            <li>
+                <a href="{{ destination.get_absolute_url }}">
+                    {{ destination }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no destinations available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

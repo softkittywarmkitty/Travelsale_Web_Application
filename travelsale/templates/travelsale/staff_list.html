@@ -1,0 +1,39 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Staff List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.travelsale.add_staff %}
+        <a
+                href="{% url 'travelsale_staff_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Staff</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Staff List</h2>
+    {% if perms.travelsale.add_staff %}
+        <div class="mobile">
+            <a
+                    href="{% url 'travelsale_staff_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Staff</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for staff in staff_list %}
+            <li>
+                <a href="{{ staff.get_absolute_url }}">
+                    {{ staff }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no staffs available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+

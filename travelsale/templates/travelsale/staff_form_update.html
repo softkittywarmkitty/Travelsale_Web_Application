@@ -1,0 +1,15 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Update Staff
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ staff.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Staff</button>
+    </form>
+{% endblock %}

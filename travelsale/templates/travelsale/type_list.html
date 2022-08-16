@@ -1,0 +1,36 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Type List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.travelsale.add_type %}
+        <a
+                href="{% url 'travelsale_type_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Type</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Type List</h2>
+    {% if perms.travelsale.add_type %}
+        <div class="mobile">
+            <a
+                    href="{% url 'travelsale_type_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Type</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for type in type_list %}
+            <li>
+                <a href="{{ type.get_absolute_url }}">
+                    {{ type }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no types available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

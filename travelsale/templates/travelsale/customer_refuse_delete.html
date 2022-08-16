@@ -1,0 +1,25 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Error Deleting Customer
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Customer</h2>
+        <p>
+            You may not delete customer {{ customer }}.  This customer is currently making the following
+            payments:
+        </p>
+
+        <ul>
+            {% for payment in payments %}
+            <li><a href="{{ payment.get_absolute_url }}">{{ payment }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'travelsale_customer_list_urlpattern' %}">Customer List</a>.
+        </p>
+    </div>
+{% endblock %}

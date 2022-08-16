@@ -1,0 +1,61 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Staff - {{ staff }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ staff }}</h2>
+                <ul class="inline">
+                    {% if perms.courseinfo.change_staff %}
+                        <li>
+                            <a href="{{ staff.get_update_url }}"
+                               class="button button-primary">
+                                Edit Staff</a></li>
+                    {% endif %}
+                    {% if perms.travelsale.delete_staff %}
+                        <li>
+                            <a href="{{ staff.get_delete_url }}"
+                               class="button button-primary">
+                                Delete Staff</a></li>
+                    {% endif %}
+                </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>First Name:</th>
+                            <td>{{ staff.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>{{ staff.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Job Position:</th>
+                            <td>{{ staff.job_position }}</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Orders</h3>
+                    <ul>
+                        {% for order in order_list %}
+                            <li>
+                                <a href="{{ order.get_absolute_url }}">{{ order }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no orders for this staff.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

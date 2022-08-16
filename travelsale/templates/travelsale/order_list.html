@@ -1,0 +1,36 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Order List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.travelsale.add_order %}
+        <a
+                href="{% url 'travelsale_order_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Order</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Order List</h2>
+    {% if perms.travelsale.add_order %}
+        <div class="mobile">
+            <a
+                    href="{% url 'travelsale_order_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Order</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for order in order_list %}
+            <li>
+                <a href="{{ order.get_absolute_url }}">
+                    {{ order }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no orders available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Payment - {{ payment }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ customer }}</h2>
+    <ul class="inline">
+        {% if perms.travelsale.change_payment %}
+        <li>
+          <a href="{{ payment.get_update_url }}"
+          class="button button-primary">
+            Edit Payment</a></li>
+        {% endif %}
+        {% if perms.travelsale.delete_payment %}
+          <a href="{{ payment.get_delete_url }}"
+          class="button button-primary">
+            Delete Payment</a></li>
+        {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Order:</th>
+                <td><a href="{{ order.get_absolute_url }}">{{ order }}</a></td>
+            </tr>
+            <tr>
+                <th>Customer:</th>
+                <td><a href="{{ customer.get_absolute_url }}">{{ customer }}</a></td>
+            </tr>
+            <tr>
+                <th>Payment Method:</th>
+                <td>{{ payment.paymethod }}</td>
+            </tr>
+        </table>
+    </section>
+
+  </div></div> <!-- row -->
+
+</article>
+{% endblock %}

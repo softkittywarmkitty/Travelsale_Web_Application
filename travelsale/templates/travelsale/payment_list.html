@@ -1,0 +1,33 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Payment List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.travelsale.add_customer %}
+      <a href="{% url 'travelsale_payment_create_urlpattern' %}"
+         class="button button-primary">
+        Create New Payment</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h2>Payment List</h2>
+    {% if perms.travelsale.add_customer %}
+    <div class="mobile">
+      <a href="{% url 'travelsale_payment_create_urlpattern' %}"
+         class="button button-primary">
+        Create New Payment</a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for payment in payment_list %}
+            <li>
+                <a href="{{ payment.get_absolute_url }}">{{ payment }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no payments available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

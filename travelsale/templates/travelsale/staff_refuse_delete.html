@@ -1,0 +1,24 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Error Deleting Staff
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Staff</h2>
+        <p>
+            You may not delete staff {{ staff }}.  This staff is currently processing the following orders:
+        </p>
+
+        <ul>
+            {% for order in orders %}
+            <li><a href="{{ order.get_absolute_url }}">{{ order }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'travelsale_staff_list_urlpattern' %}">Staff List</a>.
+        </p>
+    </div>
+{% endblock %}

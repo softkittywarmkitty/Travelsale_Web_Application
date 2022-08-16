@@ -1,0 +1,54 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Customer - {{ student }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ customer }}</h2>
+    <ul class="inline">
+        {% if perms.travelsale.change_customer %}
+        <li>
+          <a href="{{ customer.get_update_url }}"
+          class="button button-primary">
+            Edit Customer</a></li>
+        {% endif %}
+        {% if perms.travelsale.delete_customer %}
+          <a href="{{ customer.get_delete_url }}"
+          class="button button-primary">
+            Delete Customer</a></li>
+        {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>First Name:</th>
+                <td>{{ customer.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td>{{ customer.last_name }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h3>Payments</h3>
+        <ul>
+            {% for payment in payment_list %}
+                <li>
+                    <a href="{{ payment.get_absolute_url }}">{{ payment }}</a>
+                </li>
+            {% empty %}
+                <li><em>This customer is not currently making for any payments.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+  </div></div> <!-- row -->
+
+</article>
+{% endblock %}

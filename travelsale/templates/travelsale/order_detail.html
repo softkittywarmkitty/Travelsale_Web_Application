@@ -1,0 +1,62 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Order - {{ order }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ order }}</h2>
+                <ul class="inline">
+                    {% if perms.travelsale.change_order %}
+                    <li>
+                        <a href="{{ order.get_update_url }}"
+                           class="button button-primary">
+                            Edit Order</a></li>
+                    {% endif %}
+                {% if perms.travelsale.delete_order %}
+                    <li>
+                        <a href="{{ order.get_delete_url }}"
+                           class="button button-primary">
+                            Delete Order</a></li>
+                {% endif %}
+                </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Travel Product:</th>
+                <td><a href="{{ travelproduct.get_absolute_url }}">{{ travelproduct }}</a></td>
+            </tr>
+            <tr>
+                <th>Staff of Responsibility :</th>
+                <td><a href="{{ staff.get_absolute_url }}">{{ staff }}</a></td>
+            </tr>
+            <tr>
+                <th>Start Date:</th>
+                <td>{{ order.start_date }}</td>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <h3>Payments</h3>
+        <ul>
+            {% for payment in payment_list %}
+                <li>
+                    <a href="{{ payment.get_absolute_url }}">{{ payment.customer }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no customers making this order.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Error Deleting Destination
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Destination</h2>
+        <p>
+            You may not delete destination {{ destination }}.  This destination is currently including
+            the following travel products:
+        </p>
+
+        <ul>
+            {% for travelproduct in travelproducts %}
+            <li><a href="{{ travelproduct.get_absolute_url }}">{{ travelproduct }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'travelsale_destination_list_urlpattern' %}">Destination List</a>.
+        </p>
+    </div>
+{% endblock %}

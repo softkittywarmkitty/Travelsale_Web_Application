@@ -1,0 +1,15 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Create Destination
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'travelsale_destination_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Destination</button>
+    </form>
+{% endblock %}

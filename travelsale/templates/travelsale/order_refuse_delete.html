@@ -1,0 +1,25 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Error Deleting Order
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Order</h2>
+        <p>
+            You may not delete order {{ order }}.  This order is currently assigned to the following
+            payment:
+        </p>
+
+        <ul>
+            {% for payment in payments %}
+            <li><a href="{{ payment.get_absolute_url }}">{{ payment }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'travelsale_order_list_urlpattern' %}">Order List</a>.
+        </p>
+    </div>
+{% endblock %}

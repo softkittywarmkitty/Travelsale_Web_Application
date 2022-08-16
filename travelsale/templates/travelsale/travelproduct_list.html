@@ -1,0 +1,40 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Travel Product List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.travelsale.add_travelproduct %}
+    <a
+        href="{% url 'travelsale_travelproduct_create_urlpattern'  %}"
+        class="button button-primary">
+      Create New Travel Product</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h2>Travel Products List</h2>
+    {% if perms.travelsale.add_travelproduct %}
+    <div class="mobile">
+      <a
+          href="{% url 'travelsale_travelproduct_create_urlpattern' %}"
+          class="button button-primary">
+        Create New Travel Product</a>
+    </div>
+    {% endif %}
+  <ul>
+    {% for travelproduct in travelproduct_list %}
+      <li>
+        <a href="{{ travelproduct.get_absolute_url }}">
+          {{ travelproduct }}</a>
+      </li>
+    {% empty %}
+      <li><em>There are currently no travel products available.</em></li>
+    {% endfor %}
+  </ul>
+
+    <h5>Interested in any travel product above? Contact us!<br>
+        Mobile: 217-1234567  Email: consultant@travelsale.com</h5>
+{% endblock %}
+

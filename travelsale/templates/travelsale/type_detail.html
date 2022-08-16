@@ -1,0 +1,51 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Type - {{ type }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ type }}</h2>
+                <ul class="inline">
+                    {% if perms.travelsale.change_type %}
+                        <li>
+                            <a href="{{ type.get_update_url }}"
+                               class="button button-primary">
+                                Edit Type</a></li>
+                    {% endif %}
+                    {% if perms.travelsale.delete_type %}
+                        <a href="{{ type.get_delete_url }}"
+                           class="button button-primary">
+                            Delete Type</a></li>
+                    {% endif %}
+                </ul>
+                <section>
+                    <table>
+                        <tr>
+                            <th>Type:</th>
+                            <td>{{ type.type_name }}</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Travel Products</h3>
+                    <ul>
+                        {% for travelproduct in travelproduct_list %}
+                            <li>
+                                <a href="{{ travelproduct.get_absolute_url }}">{{ travelproduct }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no travel products for this type.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

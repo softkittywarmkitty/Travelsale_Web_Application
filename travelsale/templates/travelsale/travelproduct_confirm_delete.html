@@ -1,0 +1,20 @@
+{% extends 'travelsale/base.html' %}
+
+{% block title %}
+    Delete Travel Product
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ travelproduct.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete travel product {{ travelproduct }}?
+        </p>
+        <a href="{{ travelproduct.get_absolute_url }}"
+            class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Travel Product</button>
+    </form>
+{% endblock %}
